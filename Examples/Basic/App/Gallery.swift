@@ -1,3 +1,4 @@
+import BorderBeamKit
 import BuzzKit
 import BuzzKitUI
 import SwiftUI
@@ -9,6 +10,7 @@ enum DemoVariant: String, CaseIterable, Identifiable {
     case plain
     case customRows = "custom-rows"
     case customScreen = "custom-screen"
+    case beam
 
     var id: String { rawValue }
 
@@ -20,6 +22,7 @@ enum DemoVariant: String, CaseIterable, Identifiable {
         case .plain: return "Plain list"
         case .customRows: return "Custom rows"
         case .customScreen: return "Fully custom screen"
+        case .beam: return "Border beam"
         }
     }
 
@@ -31,6 +34,7 @@ enum DemoVariant: String, CaseIterable, Identifiable {
         case .plain: return "A .listStyle swap, nothing else."
         case .customRows: return "Your rows, our loading and saving."
         case .customScreen: return "Built from the data layer alone."
+        case .beam: return "Every variant of the animated glow border."
         }
     }
 }
@@ -103,6 +107,8 @@ struct DemoVariantView: View {
             CustomRowsDemo()
         case .customScreen:
             CustomScreenDemo()
+        case .beam:
+            BeamDemo()
         }
     }
 }
@@ -267,5 +273,53 @@ struct CustomScreenDemo: View {
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(16)
         .background(Color(.secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 16))
+        .borderBeam(
+            borderRadius: 16,
+            size: .sm,
+            colorVariant: .colorful,
+            strength: 0.5,
+            active: anyChannelOn(topic),
+            isVisible: anyChannelOn(topic)
+        )
+    }
+
+    private func anyChannelOn(_ topic: BuzzKit.Topic) -> Bool {
+        topic.channels.values.contains { $0.isOptedIn }
+    }
+}
+
+/// Showcase of every `BorderBeam` size and color variant.
+struct BeamDemo: View {
+    var body: some View {
+        ScrollView {
+            LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 20) {
+                ForEach(BorderBeamColorVariant.allCases, id: \.self) { variant in
+                    ForEach(BorderBeamSize.allCases, id: \.self) { size in
+                        VStack(spacing: 6) {
+                            Text(size.rawValue)
+                                .font(.footnote.weight(.medium))
+                            Text(variant.rawValue)
+                                .font(.caption2)
+                                .foregroundStyle(.secondary)
+                        }
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 22)
+                        .background(
+                            Color(.secondarySystemGroupedBackground),
+                            in: RoundedRectangle(cornerRadius: 14)
+                        )
+                        .borderBeam(
+                            borderRadius: 14,
+                            size: size,
+                            colorVariant: variant,
+                            strength: 0.7
+                        )
+                    }
+                }
+            }
+            .padding(20)
+        }
+        .background(Color(.systemGroupedBackground))
+        .navigationTitle("Border beam")
     }
 }

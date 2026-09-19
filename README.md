@@ -56,12 +56,13 @@ Add the package in Xcode (File → Add Package Dependencies) or in `Package.swif
 .package(url: "https://github.com/buzzkit-dev/buzzkit-ios", from: "1.0.0")
 ```
 
-The package provides three products:
+The package provides four products:
 
 | Product | Add to | What it does |
 | --- | --- | --- |
 | `BuzzKit` | the app | The SDK: identity, events, push, preferences, deep links |
 | `BuzzKitUI` | the app | `BuzzKitPreferencesView`, the drop-in settings screen |
+| `BorderBeamKit` | the app | `BorderBeam`, the animated glow border used across BuzzKitUI |
 | `BuzzKitNotificationServiceExtension` | a notification service extension target | Rich media and delivered receipts |
 
 ## Configure
@@ -123,7 +124,16 @@ let topics = try await BuzzKit.preferences.all()    // or build your own UI
 try await BuzzKit.preferences.set("gym-reminders", enabled: false)
 ```
 
-The default screen loads the user's topics with a toggle for each one, while a custom row builder gives you complete control over its appearance. Read more about [preferences](https://docs.buzzkit.dev/sdks/ios/preferences).
+The default screen loads the user's topics with a toggle for each one, while a custom row builder gives you complete control over its appearance. Enabled rows glow with a [border beam](#border-beam). Read more about [preferences](https://docs.buzzkit.dev/sdks/ios/preferences).
+
+## Border beam
+
+```swift
+BorderBeam(borderRadius: 16) { Card() }
+Toggle("Reminders", isOn: $on).borderBeam(size: .sm, colorVariant: .ocean, isVisible: on)
+```
+
+`BorderBeam` rides an animated glow around any view's border — traveling beams in `.md`, `.sm` and `.line` sizes, breathing halos with `.pulseInner` and `.pulseOutside`, five palettes (`.colorful`, `.mono`, `.ocean`, `.sunset`, `.accent`), plus `strength`, `speed`, `beamCount`, `direction` and a `theme` override. It pauses for Reduce Motion and never intercepts touches.
 
 ## Live Activities
 

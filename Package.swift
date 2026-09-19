@@ -10,6 +10,7 @@ let package = Package(
     products: [
         .library(name: "BuzzKit", targets: ["BuzzKit"]),
         .library(name: "BuzzKitUI", targets: ["BuzzKitUI"]),
+        .library(name: "BorderBeamKit", targets: ["BorderBeamKit"]),
         .library(
             name: "BuzzKitNotificationServiceExtension",
             targets: ["BuzzKitNotificationServiceExtension"]
@@ -22,7 +23,11 @@ let package = Package(
         ),
         .target(
             name: "BuzzKitUI",
-            dependencies: ["BuzzKit"],
+            dependencies: ["BuzzKit", "BorderBeamKit"],
+            resources: [.process("PrivacyInfo.xcprivacy")]
+        ),
+        .target(
+            name: "BorderBeamKit",
             resources: [.process("PrivacyInfo.xcprivacy")]
         ),
         .target(
@@ -32,7 +37,7 @@ let package = Package(
         ),
         .testTarget(
             name: "BuzzKitTests",
-            dependencies: ["BuzzKit", "BuzzKitNotificationServiceExtension"]
+            dependencies: ["BuzzKit", "BuzzKitNotificationServiceExtension", "BorderBeamKit"]
         ),
     ],
     swiftLanguageModes: [.v6]

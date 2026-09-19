@@ -1,3 +1,4 @@
+import BorderBeamKit
 import BuzzKit
 import SwiftUI
 
@@ -87,7 +88,7 @@ public struct BuzzKitPreferencesView<Row: View>: View {
                 }
             }
         }
-        .animation(.default, value: topics)
+        .animation(.spring(response: 0.4, dampingFraction: 0.85), value: topics)
         .task { await reload() }
         .refreshable { await reload() }
     }
@@ -99,6 +100,19 @@ public struct BuzzKitPreferencesView<Row: View>: View {
                 Task { await reload() }
             }
         }
+        .padding(14)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(
+            Color.secondary.opacity(0.1),
+            in: RoundedRectangle(cornerRadius: 12, style: .continuous)
+        )
+        .borderBeam(
+            borderRadius: 12,
+            size: .pulseOutside,
+            colorVariant: .sunset,
+            strength: 0.8
+        )
+        .listRowBackground(Color.clear)
     }
 
     private func binding(for topic: BuzzKit.Topic) -> Binding<Bool> {
@@ -200,6 +214,14 @@ public struct BuzzKitTopicRow: View {
                 }
             }
         }
+        .borderBeam(
+            borderRadius: 8,
+            size: .sm,
+            colorVariant: .ocean,
+            strength: 0.55,
+            active: isOptedIn.wrappedValue,
+            isVisible: isOptedIn.wrappedValue
+        )
     }
 }
 
@@ -256,5 +278,13 @@ public struct BuzzKitChannelRow: View {
             }
             .buttonStyle(.plain)
         }
+        .borderBeam(
+            borderRadius: 8,
+            size: .sm,
+            colorVariant: .ocean,
+            strength: 0.55,
+            active: summary != "Off",
+            isVisible: summary != "Off"
+        )
     }
 }

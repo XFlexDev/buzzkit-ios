@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+- New `BorderBeamKit` product: `BorderBeam`, an animated glow that rides a view's
+  border — traveling beams (`.md`, `.sm`, `.line`), breathing halo pulses
+  (`.pulseInner`, `.pulseOutside`), five palettes, and `strength`, `speed`,
+  `beamCount`, `direction`, `theme` and `isVisible` controls. Pauses for Reduce
+  Motion and never intercepts touches
+- `BuzzKitPreferencesView` uses border beams: enabled topic and channel rows glow
+  with an `.ocean` beam, and the load-failure card pulses `.sunset`
+- The example app gains a "Border beam" demo variant cycling every size × palette
+
 - Live Activity and push-to-start token registration failures are now logged instead of
   silently swallowed by `try?`. A failed registration leaves the server unable to update
   or end that activity, and previously produced no signal of any kind on the device

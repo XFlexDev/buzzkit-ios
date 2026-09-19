@@ -16,6 +16,8 @@ targets:
         product: BuzzKit
       - package: BuzzKit
         product: BuzzKitUI
+      - package: BuzzKit
+        product: BorderBeamKit
     info:
       path: App/Info.plist
       properties:
