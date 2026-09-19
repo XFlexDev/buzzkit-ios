@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0989EFF1897A566A8544DFCC /* Gallery.swift in Sources */ = {isa = PBXBuildFile; fileRef = E00F82137CDB169803C35CAB /* Gallery.swift */; };
 		1EB415A3B1BE475F18E7548C /* BuzzKitUI in Frameworks */ = {isa = PBXBuildFile; productRef = 8AE8AAA59D7B58F2625B28CF /* BuzzKitUI */; };
+		797770B9E841180F3AB6C258 /* BorderBeamKit in Frameworks */ = {isa = PBXBuildFile; productRef = 6F4CA8839F40DC31779DE066 /* BorderBeamKit */; };
 		96D65793802A9139931C3B1F /* ExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 749EDC824B8A1F44040EA587 /* ExampleApp.swift */; };
 		C147250E204AD58B5C418364 /* BuzzKit in Frameworks */ = {isa = PBXBuildFile; productRef = 216D10ADA77FF147575C4E42 /* BuzzKit */; };
 		D089313F194E0FFC07007DA8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59721DC1B10756BA69688E3D /* ContentView.swift */; };
@@ -17,10 +18,10 @@
 
 /* Begin PBXFileReference section */
 		1D54EB99C770F8C2326B9525 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		595F1639D7CB121EB8D2FD8E /* buzzkit-ios */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "buzzkit-ios"; path = ../..; sourceTree = SOURCE_ROOT; };
 		59721DC1B10756BA69688E3D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		749EDC824B8A1F44040EA587 /* ExampleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleApp.swift; sourceTree = "<group>"; };
 		94E231463AE4763093496D3D /* DemoPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoPreferences.swift; sourceTree = "<group>"; };
-		9990D32B23552E1FD5658962 /* BuzzKit-iOS */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "BuzzKit-iOS"; path = ../..; sourceTree = SOURCE_ROOT; };
 		C2E95872727BA11E6810A09C /* Basic.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Basic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E00F82137CDB169803C35CAB /* Gallery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gallery.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -32,6 +33,7 @@
 			files = (
 				C147250E204AD58B5C418364 /* BuzzKit in Frameworks */,
 				1EB415A3B1BE475F18E7548C /* BuzzKitUI in Frameworks */,
+				797770B9E841180F3AB6C258 /* BorderBeamKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -49,7 +51,7 @@
 		080898ACF94990457BD607FF /* Packages */ = {
 			isa = PBXGroup;
 			children = (
-				9990D32B23552E1FD5658962 /* BuzzKit-iOS */,
+				595F1639D7CB121EB8D2FD8E /* buzzkit-ios */,
 			);
 			name = Packages;
 			sourceTree = "<group>";
@@ -93,6 +95,7 @@
 			packageProductDependencies = (
 				216D10ADA77FF147575C4E42 /* BuzzKit */,
 				8AE8AAA59D7B58F2625B28CF /* BuzzKitUI */,
+				6F4CA8839F40DC31779DE066 /* BorderBeamKit */,
 			);
 			productName = Basic;
 			productReference = C2E95872727BA11E6810A09C /* Basic.app */;
@@ -331,6 +334,10 @@
 		216D10ADA77FF147575C4E42 /* BuzzKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = BuzzKit;
+		};
+		6F4CA8839F40DC31779DE066 /* BorderBeamKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = BorderBeamKit;
 		};
 		8AE8AAA59D7B58F2625B28CF /* BuzzKitUI */ = {
 			isa = XCSwiftPackageProductDependency;
