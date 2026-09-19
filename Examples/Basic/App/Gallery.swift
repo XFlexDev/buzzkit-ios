@@ -290,30 +290,20 @@ struct CustomScreenDemo: View {
 
 /// Showcase of every `BorderBeam` size and color variant.
 struct BeamDemo: View {
+    private let variants = BorderBeamColorVariant.allCases
+    private let sizes = BorderBeamSize.allCases
+
     var body: some View {
         ScrollView {
-            LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 20) {
-                ForEach(BorderBeamColorVariant.allCases, id: \.self) { variant in
-                    ForEach(BorderBeamSize.allCases, id: \.self) { size in
-                        VStack(spacing: 6) {
-                            Text(size.rawValue)
-                                .font(.footnote.weight(.medium))
-                            Text(variant.rawValue)
-                                .font(.caption2)
-                                .foregroundStyle(.secondary)
+            // Grid, not LazyVGrid: lazy cells never materialized below the fold.
+            Grid(horizontalSpacing: 20, verticalSpacing: 20) {
+                ForEach(variants, id: \.self) { variant in
+                    ForEach(sizes.chunked(into: 2), id: \.self) { pair in
+                        GridRow {
+                            ForEach(pair, id: \.self) { size in
+                                cell(size: size, variant: variant)
+                            }
                         }
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 22)
-                        .background(
-                            Color(.secondarySystemGroupedBackground),
-                            in: RoundedRectangle(cornerRadius: 14)
-                        )
-                        .borderBeam(
-                            borderRadius: 14,
-                            size: size,
-                            colorVariant: variant,
-                            strength: 0.7
-                        )
                     }
                 }
             }
@@ -321,5 +311,33 @@ struct BeamDemo: View {
         }
         .background(Color(.systemGroupedBackground))
         .navigationTitle("Border beam")
+    }
+
+    private func cell(size: BorderBeamSize, variant: BorderBeamColorVariant) -> some View {
+        VStack(spacing: 6) {
+            Text(size.rawValue)
+                .font(.footnote.weight(.medium))
+            Text(variant.rawValue)
+                .font(.caption2)
+                .foregroundStyle(.secondary)
+        }
+        .frame(maxWidth: .infinity)
+        .padding(.vertical, 22)
+        .background(
+            Color(.secondarySystemGroupedBackground),
+            in: RoundedRectangle(cornerRadius: 14)
+        )
+        .borderBeam(
+            borderRadius: 14,
+            size: size,
+            colorVariant: variant,
+            strength: 0.7
+        )
+    }
+}
+
+private extension Array {
+    func chunked(into size: Int) -> [ArraySlice<Element>] {
+        stride(from: 0, to: count, by: size).map { self[$0..<Swift.min($0 + size, count)] }
     }
 }

@@ -261,10 +261,10 @@ struct BeamOverlay: View {
 struct BorderBeam_Previews: PreviewProvider {
     static var previews: some View {
         ScrollView {
-            LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 24) {
+            VStack(spacing: 24) {
                 ForEach(BorderBeamColorVariant.allCases, id: \.self) { variant in
                     ForEach(BorderBeamSize.allCases, id: \.self) { size in
-                        Text("\(size.rawValue)")
+                        Text("\(variant.rawValue) · \(size.rawValue)")
                             .font(.caption)
                             .frame(maxWidth: .infinity, minHeight: 64)
                             .background(
