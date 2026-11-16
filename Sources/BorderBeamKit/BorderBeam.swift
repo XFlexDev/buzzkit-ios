@@ -166,7 +166,7 @@ struct BeamOverlay: View {
             if isAnimating {
                 clockStart = Date()
             } else {
-                bankedTime = elapsed(at: Date())
+                bankedTime += Date().timeIntervalSince(clockStart)
             }
         }
     }
@@ -182,7 +182,7 @@ struct BeamOverlay: View {
 
     /// 0…1 breathing phase shared by the pulse variants.
     private func breath(at date: Date) -> Double {
-        (sin(2 * .pi * elapsed(at: date) * speed / (lap * 0.6)) + 1) / 2
+        (sin(2 * .pi * elapsed(at: date) * speed / lap) + 1) / 2
     }
 
     @ViewBuilder
